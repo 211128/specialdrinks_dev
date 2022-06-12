@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern": [
+    "#B#",
+    "H$H",
+    "#A#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:sugar"
+    },
+    "B": {
+          "item": "minecraft:blaze_rod"
+        },
+        "H": {
+                  "item": "minecraft:honey_bottle"
+                },
+    "A": {
+          "item": "minecraft:potion"
+        },
+    "$": {
+      "item": "minecraft:fermented_spider_eye"
+    }
+  },
+  "result": {
+    "item": "specialdrinks:potivelocidad"
+
+  }
+}

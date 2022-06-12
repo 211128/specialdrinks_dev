@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#A#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:golden_apple"
+    },
+    "A": {
+          "item": "minecraft:gold_block"
+        }
+  },
+  "result": {
+    "item": "specialdrinks:combate",
+    "count": 2
+  }
+}

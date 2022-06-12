@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "specialdrinks:racimo"
+    },
+    "B": {
+          "item": "specialdrinks:burbujaespecial"
+        },
+    "A": {
+          "item": "specialdrinks:burbujavision"
+        }
+  },
+  "result": {
+    "item": "specialdrinks:burbujaresistencia"
+
+  }
+}

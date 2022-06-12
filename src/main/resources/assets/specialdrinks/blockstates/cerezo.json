@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "specialdrinks:block/cerezo_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "specialdrinks:block/cerezo"
+    },
+    "axis=z": {
+      "model": "specialdrinks:block/cerezo_horizontal",
+      "x": 90
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "specialdrinks:block/cerezostrippet_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "specialdrinks:block/cerezostrippet"
+    },
+    "axis=z": {
+      "model": "specialdrinks:block/cerezostrippet_horizontal",
+      "x": 90
+    }
+  }
+}

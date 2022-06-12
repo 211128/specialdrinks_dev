@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "specialdrinks:cebadabloque"
+    }
+  ],
+  "result": {
+    "item": "specialdrinks:cebada",
+    "count": 9
+  }
+}

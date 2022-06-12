@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "specialdrinks:block/fuerza_stage2"
+  }
+}

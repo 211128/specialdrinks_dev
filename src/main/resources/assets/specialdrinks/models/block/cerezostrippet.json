@@ -1,0 +1,9 @@
+{
+
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "specialdrinks:block/cerezotop",
+    "side": "specialdrinks:block/cerezo_strippet"
+
+  }
+}
