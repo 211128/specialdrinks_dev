@@ -102,7 +102,7 @@ public class Bushvision extends BushBlock implements IGrowable {
     }
 
     public boolean canUseBonemeal(World p_180670_1_, Random p_180670_2_, BlockPos p_180670_3_, BlockState p_180670_4_) {
-        return true;
+        return false;
     }
 
     public void grow(ServerWorld p_225535_1_, Random p_225535_2_, BlockPos p_225535_3_, BlockState p_225535_4_) {

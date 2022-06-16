@@ -15,34 +15,16 @@ public class TipsCuracion extends ModDrinks {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-
         if(Screen.hasShiftDown()) {
-
-
-
             tooltip.add(new TranslationTextComponent("tooltip.specialdrinks.curacion_shift"));
-
-
-
         } else {
-
-
-
             tooltip.add(new TranslationTextComponent("tooltip.specialdrinks.curacion"));
-
-
-
-
-
-
         }
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
-
     public boolean hasEffect(ItemStack stack){
         return true;
     }
-
     public TipsCuracion(Properties builder) {
         super(builder);
     }

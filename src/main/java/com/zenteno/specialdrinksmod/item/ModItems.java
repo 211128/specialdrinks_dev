@@ -51,7 +51,6 @@ public class ModItems {
     public static final RegistryObject<Item> CEBADAPAN = ITEMS.register("cebadapan",
             () -> new Item( new Item.Properties().group(ModItemGroup.DRINKS_GROUP).food(new Food.Builder().hunger(9).saturation(0.8f).build())));
 //items relacionados con cebada------------------------------------------------------------------
-
     public static final RegistryObject<Item> CHILE = ITEMS.register("chile",
             () -> new BlockItem(ModBlocks.CHILE.get(), new Item.Properties().group(ModItemGroup.DRINKS_GROUP).food(new Food.Builder().hunger(4).saturation(0.2f)
                     .effect(() -> new EffectInstance(Effects.INSTANT_DAMAGE, 1, 1), 1f)
@@ -141,10 +140,25 @@ public class ModItems {
                     .food(new Food.Builder().effect(() -> new EffectInstance(Effects.FIRE_RESISTANCE, 220, 1), 2.0f)
                     .build())));
 
-
-
-
     //pociones reducidas----------------------------------------------------------------------------
+    //1.2
+
+    public static final RegistryObject<Item> COMPOSTA = ITEMS.register("composta",
+            () -> new Item( new Item.Properties().group(ModItemGroup.DRINKS_GROUP)));
+
+
+    public static final RegistryObject<Item> CEREALES = ITEMS.register("cereales",
+            () -> new Item( new Item.Properties().group(ModItemGroup.DRINKS_GROUP).food(new Food.Builder().hunger(4).saturation(0.8f).build())));
+
+    public static final RegistryObject<Item> GUSANO = ITEMS.register("worm",
+            () -> new Item( new Item.Properties().group(ModItemGroup.DRINKS_GROUP)));
+
+    public static final RegistryObject<Item> BOLAGUSANO = ITEMS.register("ball_worm",
+            () -> new Item( new Item.Properties().group(ModItemGroup.DRINKS_GROUP)));
+
+
+    public static final RegistryObject<Item> SOPAHONGO = ITEMS.register("soap",
+            () -> new Item( new Item.Properties().group(ModItemGroup.DRINKS_GROUP).food(new Food.Builder().hunger(4).saturation(0.8f).build())));
 
 
 

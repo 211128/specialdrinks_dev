@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:wheat_seeds"
+    },
+    "A": {
+          "item": "minecraft:cocoa_beans"
+        }
+  },
+  "result": {
+    "item": "specialdrinks:cereales"
+
+  }
+}

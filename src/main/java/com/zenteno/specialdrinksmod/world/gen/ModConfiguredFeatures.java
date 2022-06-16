@@ -39,6 +39,12 @@ public class ModConfiguredFeatures {
                             SimpleBlockPlacer.PLACER)).tries(1).build())
             .withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).count(1);
 
+    //1.2
+    public static final ConfiguredFeature<?, ?> HONGO_CONFIG = Feature.FLOWER.withConfiguration((
+                    new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.HONGO.get().getDefaultState()),
+                            SimpleBlockPlacer.PLACER)).tries(1).build())
+            .withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).count(1);
+
     private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key,
                                                                                  ConfiguredFeature<FC, ?> configuredFeature) {
         return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, key, configuredFeature);

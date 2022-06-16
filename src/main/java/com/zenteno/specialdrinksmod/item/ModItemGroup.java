@@ -9,7 +9,7 @@ public class ModItemGroup {
     {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ModItems.CEBADASEEDS.get());
+            return new ItemStack(ModItems.BURBUJACONTRAFUEGO.get());
         }
 
 

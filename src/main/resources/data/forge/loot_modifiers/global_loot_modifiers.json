@@ -1,7 +1,7 @@
 {
   "replace": false,
   "entries": [
-    "specialdrinks:cebadaseeds_from_grass"
-
+    "specialdrinks:cebadaseeds_from_grass",
+    "specialdrinks:worm_from_grass_block"
   ]
 }

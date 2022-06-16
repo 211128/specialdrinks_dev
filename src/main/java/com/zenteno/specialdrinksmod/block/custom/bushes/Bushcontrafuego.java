@@ -11,6 +11,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.Property;
 import net.minecraft.state.StateContainer.Builder;
@@ -24,6 +25,8 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeHooks;
 
 import java.util.Random;
@@ -59,6 +62,21 @@ public class Bushcontrafuego extends BushBlock implements IGrowable {
         if (i < 3 && p_225542_2_.getLightSubtracted(p_225542_3_.up(), 0) >= 9 && ForgeHooks.onCropsGrowPre(p_225542_2_, p_225542_3_, p_225542_1_, p_225542_4_.nextInt(5) == 0)) {
             p_225542_2_.setBlockState(p_225542_3_, (BlockState)p_225542_1_.with(AGE, i + 1), 2);
             ForgeHooks.onCropsGrowPost(p_225542_2_, p_225542_3_, p_225542_1_);
+        }
+
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void animateTick(BlockState p_180655_1_, World p_180655_2_, BlockPos p_180655_3_, Random p_180655_4_) {
+        VoxelShape lvt_5_1_ = this.getShape(p_180655_1_, p_180655_2_, p_180655_3_, ISelectionContext.dummy());
+        Vector3d lvt_6_1_ = lvt_5_1_.getBoundingBox().getCenter();
+        double lvt_7_1_ = (double)p_180655_3_.getX() + lvt_6_1_.x;
+        double lvt_9_1_ = (double)p_180655_3_.getZ() + lvt_6_1_.z;
+
+        for(int lvt_11_1_ = 0; lvt_11_1_ < 3; ++lvt_11_1_) {
+            if (p_180655_4_.nextBoolean()) {
+                p_180655_2_.addParticle(ParticleTypes.FLAME, lvt_7_1_ + p_180655_4_.nextDouble() / 5.0, (double)p_180655_3_.getY() + (0.5 - p_180655_4_.nextDouble()), lvt_9_1_ + p_180655_4_.nextDouble() / 5.0, 0.0, 0.0, 0.0);
+            }
         }
 
     }
@@ -102,7 +120,7 @@ public class Bushcontrafuego extends BushBlock implements IGrowable {
     }
 
     public boolean canUseBonemeal(World p_180670_1_, Random p_180670_2_, BlockPos p_180670_3_, BlockState p_180670_4_) {
-        return true;
+        return false;
     }
 
     public void grow(ServerWorld p_225535_1_, Random p_225535_2_, BlockPos p_225535_3_, BlockState p_225535_4_) {

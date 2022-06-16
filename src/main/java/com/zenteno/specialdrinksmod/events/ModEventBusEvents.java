@@ -23,6 +23,11 @@ public class ModEventBusEvents {
 
         );
 
+        event.getRegistry().registerAll(
+                new DropSeedsModificador.Serializer().setRegistryName
+                        (new ResourceLocation(SpecialDrinks.MOD_ID,"worm_from_grass_block"))
+
+        );
     }
 
 

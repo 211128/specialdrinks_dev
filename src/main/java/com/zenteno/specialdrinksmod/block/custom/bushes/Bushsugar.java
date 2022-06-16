@@ -1,50 +1,47 @@
+
 package com.zenteno.specialdrinksmod.block.custom.bushes;
+
 
 import com.zenteno.specialdrinksmod.block.custom.bushes.BushBlocks.BushBlockPinchos;
 import com.zenteno.specialdrinksmod.item.ModItems;
 import net.minecraft.block.*;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particles.ParticleTypes;
+import net.minecraft.item.Items;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.Property;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeHooks;
 
+import java.util.Properties;
 import java.util.Random;
 
-public class Pinchos extends BushBlockPinchos implements IGrowable {
+public class Bushsugar extends BushBlockPinchos implements IGrowable {
     public static final IntegerProperty AGE;
     private static final VoxelShape BUSHLING_SHAPE;
     private static final VoxelShape GROWING_SHAPE;
 
-
-    protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        return state.matchesBlock(Blocks.NETHERRACK);
-    }
-
-
-    public Pinchos(Properties p_i49971_1_) {
+    public Bushsugar(Properties p_i49971_1_) {
         super(p_i49971_1_);
         this.setDefaultState((BlockState)((BlockState)this.stateContainer.getBaseState()).with(AGE, 0));
     }
 
-    public ItemStack getItem(IBlockReader p_185473_1_, BlockPos p_185473_2_, BlockState p_185473_3_) {
-        return new ItemStack(ModItems.BURBUJAVISION.get());
+
+    protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+        return state.matchesBlock(Blocks.SAND);
     }
+
 
     public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
         if ((Integer)p_220053_1_.get(AGE) == 0) {
@@ -67,39 +64,30 @@ public class Pinchos extends BushBlockPinchos implements IGrowable {
 
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState p_180655_1_, World p_180655_2_, BlockPos p_180655_3_, Random p_180655_4_) {
-        VoxelShape lvt_5_1_ = this.getShape(p_180655_1_, p_180655_2_, p_180655_3_, ISelectionContext.dummy());
-        Vector3d lvt_6_1_ = lvt_5_1_.getBoundingBox().getCenter();
-        double lvt_7_1_ = (double)p_180655_3_.getX() + lvt_6_1_.x;
-        double lvt_9_1_ = (double)p_180655_3_.getZ() + lvt_6_1_.z;
-
-        for(int lvt_11_1_ = 0; lvt_11_1_ < 3; ++lvt_11_1_) {
-            if (p_180655_4_.nextBoolean()) {
-                p_180655_2_.addParticle(ParticleTypes.SMOKE, lvt_7_1_ + p_180655_4_.nextDouble() / 5.0, (double)p_180655_3_.getY() + (0.5 - p_180655_4_.nextDouble()), lvt_9_1_ + p_180655_4_.nextDouble() / 5.0, 0.0, 0.0, 0.0);
-            }
-        }
-
-    }
-
-
-    public void onEntityCollision(BlockState p_196262_1_, World p_196262_2_, BlockPos p_196262_3_, Entity p_196262_4_) {
-        if (p_196262_4_ instanceof LivingEntity && p_196262_4_.getType() != EntityType.FOX && p_196262_4_.getType() != EntityType.BEE) {
-            p_196262_4_.setMotionMultiplier(p_196262_1_, new Vector3d(0.800000011920929D, 0.75D, 0.800000011920929D));
-            if (!p_196262_2_.isRemote && (Integer)p_196262_1_.get(AGE) > 0 && (p_196262_4_.lastTickPosX != p_196262_4_.getPosX() || p_196262_4_.lastTickPosZ != p_196262_4_.getPosZ())) {
-                double d0 = Math.abs(p_196262_4_.getPosX() - p_196262_4_.lastTickPosX);
-                double d1 = Math.abs(p_196262_4_.getPosZ() - p_196262_4_.lastTickPosZ);
-                if (d0 >= 0.003000000026077032D || d1 >= 0.003000000026077032D) {
-                    p_196262_4_.attackEntityFrom(DamageSource.GENERIC, 5.0F);
-                }
-            }
-        }
-
+    public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
+        BlockPos blockpos = pos.down();
+        if (state.getBlock() == this) //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
+            return worldIn.getBlockState(blockpos).canSustainPlant(worldIn, blockpos, Direction.UP, this);
+        return this.isValidGround(worldIn.getBlockState(blockpos), worldIn, blockpos);
     }
 
 
 
-
+    public ActionResultType onBlockActivated(BlockState p_225533_1_, World p_225533_2_, BlockPos p_225533_3_, PlayerEntity p_225533_4_, Hand p_225533_5_, BlockRayTraceResult p_225533_6_) {
+        int i = (Integer)p_225533_1_.get(AGE);
+        boolean flag = i == 3;
+        if (!flag) {
+            return ActionResultType.FAIL;
+        } else if (i > 1) {
+            int j = 0 + p_225533_2_.rand.nextInt(1);
+            spawnAsEntity(p_225533_2_, p_225533_3_, new ItemStack(Items.SUGAR_CANE.getItem(), j + (flag ? 2 : 0)));
+            p_225533_2_.playSound((PlayerEntity)null, p_225533_3_, SoundEvents.BLOCK_GRASS_HIT, SoundCategory.BLOCKS, 1.0F, 0.8F + p_225533_2_.rand.nextFloat() * 0.4F);
+            p_225533_2_.setBlockState(p_225533_3_, (BlockState)p_225533_1_.with(AGE, 1), 2);
+            return ActionResultType.func_233537_a_(p_225533_2_.isRemote);
+        } else {
+            return super.onBlockActivated(p_225533_1_, p_225533_2_, p_225533_3_, p_225533_4_, p_225533_5_, p_225533_6_);
+        }
+    }
 
     protected void fillStateContainer(Builder<Block, BlockState> p_206840_1_) {
         p_206840_1_.add(new Property[]{AGE});
@@ -109,9 +97,11 @@ public class Pinchos extends BushBlockPinchos implements IGrowable {
         return (Integer)p_176473_3_.get(AGE) < 3;
     }
 
-    public boolean canUseBonemeal(World p_180670_1_, Random p_180670_2_, BlockPos p_180670_3_, BlockState p_180670_4_) {
-        return true;
+    @Override
+    public boolean canUseBonemeal(World world, Random random, BlockPos blockPos, BlockState blockState) {
+        return false;
     }
+
 
     public void grow(ServerWorld p_225535_1_, Random p_225535_2_, BlockPos p_225535_3_, BlockState p_225535_4_) {
         int i = Math.min(3, (Integer)p_225535_4_.get(AGE) + 1);

@@ -1,6 +1,6 @@
 package com.zenteno.specialdrinksmod.block.custom.bushes;
 
-import com.zenteno.specialdrinksmod.block.custom.bushes.BushBlocks.BushBlockFertil;
+
 import com.zenteno.specialdrinksmod.item.ModItems;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
@@ -9,8 +9,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.Property;
 import net.minecraft.state.StateContainer.Builder;
@@ -103,7 +101,7 @@ public class Bushcaida extends BushBlock implements IGrowable {
     }
 
     public boolean canUseBonemeal(World p_180670_1_, Random p_180670_2_, BlockPos p_180670_3_, BlockState p_180670_4_) {
-        return true;
+        return false;
     }
 
     public void grow(ServerWorld p_225535_1_, Random p_225535_2_, BlockPos p_225535_3_, BlockState p_225535_4_) {

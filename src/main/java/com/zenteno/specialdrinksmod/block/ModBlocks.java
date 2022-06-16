@@ -3,7 +3,8 @@ package com.zenteno.specialdrinksmod.block;
 import com.zenteno.specialdrinksmod.SpecialDrinks;
 import com.zenteno.specialdrinksmod.block.custom.CropBlock;
 import com.zenteno.specialdrinksmod.block.custom.bushes.*;
-import com.zenteno.specialdrinksmod.block.custom.bushes.BushBlocks.BushBlockFertil;
+;
+import com.zenteno.specialdrinksmod.block.custom.flowers.Tricholosporum;
 import com.zenteno.specialdrinksmod.block.custom.tree.CerezoTree;
 import com.zenteno.specialdrinksmod.item.ModItemGroup;
 import com.zenteno.specialdrinksmod.item.ModItems;
@@ -96,10 +97,20 @@ public static final RegistryObject<Block> FLORORO = registerBlock("flororo",
 
 
     //1.1
-    public static final RegistryObject<Block> BERRI = registerBlock("berri_crop",
+    public static final RegistryObject<Block> SPIKES = registerBlock("spikes_crop",
             () -> new Pinchos(AbstractBlock.Properties.from(Blocks.WHEAT)));
 
     //1.1
+    //1.2
+    public static final RegistryObject<Block> SUGAR = registerBlock("bush_sugar",
+            () -> new Bushsugar(AbstractBlock.Properties.from(Blocks.SUGAR_CANE)));
+
+
+    public static final RegistryObject<Block> HONGO = registerBlock("tricholosporum",
+            () -> new Tricholosporum(Effects.HASTE, AbstractBlock.Properties.from(Blocks.DANDELION).setLightLevel((state -> {
+                return 5; }))));
+
+    //1.2
 
 
 

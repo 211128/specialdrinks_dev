@@ -76,7 +76,9 @@ public class SpecialDrinks
             RenderTypeLookup.setRenderLayer(ModBlocks.HOJASCEREZO.get(), RenderType.getCutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.SAPLING_CEREZO.get(), RenderType.getCutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.BURBUJAVELOCIDAD.get(), RenderType.getCutout());//1.1
-            RenderTypeLookup.setRenderLayer(ModBlocks.BERRI.get(), RenderType.getCutout());//1.1
+            RenderTypeLookup.setRenderLayer(ModBlocks.SPIKES.get(), RenderType.getCutout());//1.1
+            RenderTypeLookup.setRenderLayer(ModBlocks.SUGAR.get(), RenderType.getCutout());//1.2
+            RenderTypeLookup.setRenderLayer(ModBlocks.HONGO.get(), RenderType.getCutout());//1.2
 
         });
 
