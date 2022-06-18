@@ -32,7 +32,7 @@ public class Pinchos extends BushBlockPinchos implements IGrowable {
     private static final VoxelShape GROWING_SHAPE;
 
 
-    protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    public boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
         return state.matchesBlock(Blocks.NETHERRACK);
     }
 

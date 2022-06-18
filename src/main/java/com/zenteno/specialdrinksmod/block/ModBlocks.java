@@ -10,10 +10,8 @@ import com.zenteno.specialdrinksmod.item.ModItemGroup;
 import com.zenteno.specialdrinksmod.item.ModItems;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.trees.OakTree;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.potion.Effect;
 import net.minecraft.potion.Effects;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
@@ -103,7 +101,7 @@ public static final RegistryObject<Block> FLORORO = registerBlock("flororo",
     //1.1
     //1.2
     public static final RegistryObject<Block> SUGAR = registerBlock("bush_sugar",
-            () -> new Bushsugar(AbstractBlock.Properties.from(Blocks.SUGAR_CANE)));
+            () -> new BushSugarBlock(AbstractBlock.Properties.from(Blocks.SUGAR_CANE)));
 
 
     public static final RegistryObject<Block> HONGO = registerBlock("tricholosporum",

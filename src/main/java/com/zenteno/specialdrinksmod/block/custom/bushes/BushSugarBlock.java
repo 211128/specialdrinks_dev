@@ -1,10 +1,9 @@
 
 package com.zenteno.specialdrinksmod.block.custom.bushes;
 
-
-import com.zenteno.specialdrinksmod.block.custom.bushes.BushBlocks.BushBlockPinchos;
-import com.zenteno.specialdrinksmod.item.ModItems;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -17,37 +16,31 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.IPlantable;
 
-import java.util.Properties;
 import java.util.Random;
 
-public class Bushsugar extends BushBlockPinchos implements IGrowable {
+public class BushSugarBlock extends Block implements IPlantable {
     public static final IntegerProperty AGE;
     private static final VoxelShape BUSHLING_SHAPE;
     private static final VoxelShape GROWING_SHAPE;
 
-    public Bushsugar(Properties p_i49971_1_) {
-        super(p_i49971_1_);
-        this.setDefaultState((BlockState)((BlockState)this.stateContainer.getBaseState()).with(AGE, 0));
-    }
-
-
-    protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        return state.matchesBlock(Blocks.SAND);
+    public BushSugarBlock(Properties properties) {
+        super(properties);
+        this.setDefaultState(this.stateContainer.getBaseState().with(AGE, 0));
     }
 
 
     public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
-        if ((Integer)p_220053_1_.get(AGE) == 0) {
+        if (p_220053_1_.get(AGE) == 0) {
             return BUSHLING_SHAPE;
         } else {
-            return (Integer)p_220053_1_.get(AGE) < 3 ? GROWING_SHAPE : super.getShape(p_220053_1_, p_220053_2_, p_220053_3_, p_220053_4_);
+            return p_220053_1_.get(AGE) < 3 ? GROWING_SHAPE : super.getShape(p_220053_1_, p_220053_2_, p_220053_3_, p_220053_4_);
         }
     }
 
@@ -65,13 +58,9 @@ public class Bushsugar extends BushBlockPinchos implements IGrowable {
     }
 
     public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-        BlockPos blockpos = pos.down();
-        if (state.getBlock() == this) //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
-            return worldIn.getBlockState(blockpos).canSustainPlant(worldIn, blockpos, Direction.UP, this);
-        return this.isValidGround(worldIn.getBlockState(blockpos), worldIn, blockpos);
+        BlockState blockstate = worldIn.getBlockState(pos.down());
+        return blockstate.matchesBlock(Blocks.SAND);
     }
-
-
 
     public ActionResultType onBlockActivated(BlockState p_225533_1_, World p_225533_2_, BlockPos p_225533_3_, PlayerEntity p_225533_4_, Hand p_225533_5_, BlockRayTraceResult p_225533_6_) {
         int i = (Integer)p_225533_1_.get(AGE);
@@ -97,11 +86,9 @@ public class Bushsugar extends BushBlockPinchos implements IGrowable {
         return (Integer)p_176473_3_.get(AGE) < 3;
     }
 
-    @Override
     public boolean canUseBonemeal(World world, Random random, BlockPos blockPos, BlockState blockState) {
         return false;
     }
-
 
     public void grow(ServerWorld p_225535_1_, Random p_225535_2_, BlockPos p_225535_3_, BlockState p_225535_4_) {
         int i = Math.min(3, (Integer)p_225535_4_.get(AGE) + 1);
@@ -112,5 +99,10 @@ public class Bushsugar extends BushBlockPinchos implements IGrowable {
         AGE = BlockStateProperties.AGE_0_3;
         BUSHLING_SHAPE = Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D);
         GROWING_SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
+    }
+
+    @Override
+    public BlockState getPlant(IBlockReader world, BlockPos pos) {
+        return getDefaultState();
     }
 }
